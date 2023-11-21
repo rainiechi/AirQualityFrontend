@@ -1,0 +1,37 @@
+.Home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-top: 150px;
+  }
+  
+  .date {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 25px; /* Add some spacing between the date and checkboxes */
+    color:  rgb(98, 133, 170)
+  }
+  
+  .checkbox {
+    display: flex; /* Add display:flex to .checkbox */
+    justify-content: center; /* Horizontally center the checkboxes */
+    align-items: flex-start; /* Align checkboxes to the left */
+    margin-bottom: 25px; /* Add some spacing between checkboxes */
+  }
+  
+  .checkbox label {
+    font-size: 23px; /* Adjust the font size as needed */
+    
+  }
+  
+  .reportButton {
+    background-color: rgb(98, 133, 170);
+    color: white;
+    padding: 20px 50px;
+    font-size: 25px;
+    font-weight:  bold;
+    border: none;
+    cursor: pointer;
+  }
