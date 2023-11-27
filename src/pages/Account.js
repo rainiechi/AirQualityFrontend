@@ -10,6 +10,8 @@ function Account() {
   const [password, setPassword] = useState('********');
   const [cellphone, setCellphone] = useState('123-456-7890');
   const [location, setLocation] = useState('City, Country');
+  const [Lat, setLat] = useState('47.253078');
+  const [Lon, setLon] = useState('-122.441528');
 
   const handleSave = () => {
     console.log('Changes saved');
@@ -78,7 +80,24 @@ function Account() {
       onChange={(e) => setLocation(e.target.value)}
     />
   </div>
-  
+  <div className="form-group">
+    <label htmlFor="latitude">Latitude:</label>
+    <input
+      type="text"
+      id="latitude"
+      value={Lat}
+      onChange={(e) => setLat(e.target.value)}
+    />
+  </div>
+  <div className="form-group">
+    <label htmlFor="longitude">Longitude:</label>
+    <input
+      type="text"
+      id="longitude"
+      value={Lon}
+      onChange={(e) => setLon(e.target.value)}
+    />
+  </div>
   <button type="button" onClick={handleSave}>Save</button>
 </form>
     </div>

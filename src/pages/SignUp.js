@@ -7,6 +7,8 @@ function SignUp(props) {
     const [Pass, setPass] = useState('');
     const [FName, setFName] = useState('');
     const [LName, setLName] = useState('');
+    const [Lat, setLat] = useState('');
+    const [Lon, setLon] = useState('');
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -17,14 +19,18 @@ function SignUp(props) {
   return (
     <div className='auth-form-container'>
     <form className="signup-form" onSubmit={handleSubmit}>
-        <label> First Name</label>
-        <input value={FName} name="First Name" id="First Name" placeholder="First Name" />
-        <label> Last Name</label>
-        <input value={LName} name="Last Name" id="Last Name" placeholder="Last Name" />
+    <label htmlFor="First Name">First Name</label>
+      <input value={FName} onChange={(e) => setFName(e.target.value)} type="Fname" placeholder="First Name"/>
+      <label htmlFor="Last Name">Last Name</label>
+      <input value={LName} onChange={(e) => setLName(e.target.value)} type="Lname" placeholder="Last Name"/>
       <label htmlFor="Email">Email</label>
-      <input value={Email} onChange={(e) => setEmail(e.target.value)} type="Email" placeholder="youremail@gmail.com"/>
+      <input value={Email} onChange={(e) => setEmail(e.target.value)} type="Email" placeholder="Enter an email"/>
       <label htmlFor="Password">Password</label>
-      <input value={Pass} onChange={(e) => setPass(e.target.value)} Type="Password" placeholder="********" id="Password" name="Password"/>
+      <input value={Pass} onChange={(e) => setPass(e.target.value)} Type="Password" placeholder="Enter a password" id="Password" name="Password"/>
+      <label htmlFor="Latitude">Latitude</label>
+      <input value={Lat} onChange={(e) => setLat(e.target.value)} type="Lat" placeholder="Enter latitude"/>
+      <label htmlFor="Longitude">Longitude</label>
+      <input value={Lon} onChange={(e) => setLon(e.target.value)} type="Lon" placeholder="Enter longitude"/>
       <button type="submit">Register</button>   
     </form>
     
