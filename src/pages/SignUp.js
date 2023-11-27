@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import '../styles/Login_Signup.css';
+import { Link } from 'react-router-dom';
+
 function SignUp(props) {
     const [Email, setEmail] = useState('');
     const [Pass, setPass] = useState('');
@@ -24,7 +27,10 @@ function SignUp(props) {
       <input value={Pass} onChange={(e) => setPass(e.target.value)} Type="Password" placeholder="********" id="Password" name="Password"/>
       <button type="submit">Register</button>   
     </form>
-    <button className="link-btn" onClick={() => props.onFormSwitch('login')}>Already have an account? Login here</button>
+    
+     <p className="login-text">
+        Already have an account? <Link to="/Login">Login here</Link>.
+      </p>
     </div>
   )
 }

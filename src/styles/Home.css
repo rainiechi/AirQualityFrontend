@@ -10,19 +10,19 @@
   .date {
     font-size: 50px;
     font-weight: bold;
-    margin-bottom: 25px; /* Add some spacing between the date and checkboxes */
+    margin-bottom: 25px; 
     color:  rgb(98, 133, 170)
   }
   
   .checkbox {
-    display: flex; /* Add display:flex to .checkbox */
-    justify-content: center; /* Horizontally center the checkboxes */
-    align-items: flex-start; /* Align checkboxes to the left */
-    margin-bottom: 25px; /* Add some spacing between checkboxes */
+    display: flex; 
+    justify-content: center; 
+    align-items: flex-start; 
+    margin-bottom: 25px; 
   }
   
   .checkbox label {
-    font-size: 23px; /* Adjust the font size as needed */
+    font-size: 23px; 
     
   }
   

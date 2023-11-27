@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 import '../styles/Home.css';
 
 function Home() {
+  const navigate = useNavigate();
+
   const today = new Date();
   const formattedDate = today.toLocaleDateString();
 
@@ -10,20 +14,22 @@ function Home() {
   const [pm25Checked, setPM25Checked] = useState(true);
   const [pm10Checked, setPM10Checked] = useState(true);
 
-  // Function to handle the button click event
+  
   const handleReportButtonClick = () => {
-    // Perform actions when the "Report" button is clicked
-    // For now, just log the selected checkboxes to the console
-    console.log('Ozone Checked:', ozoneChecked);
-    console.log('PM2.5 Checked:', pm25Checked);
-    console.log('PM10 Checked:', pm10Checked);
+    // Pass checkbox values as parameters to /Report
+    navigate('/Report', {
+      state: {
+        ozoneChecked,
+        pm25Checked,
+        pm10Checked,
+      },
+    });
   };
 
   return (
     <div className="Home">
-      <div className="date">
-        {formattedDate}
-      </div>
+      <Navbar />
+      <div className="date">{formattedDate}</div>
       <div className="checkbox">
         <label>
           <input type="checkbox" checked={ozoneChecked} onChange={() => setOzoneChecked(!ozoneChecked)} />
@@ -42,7 +48,9 @@ function Home() {
           PM10
         </label>
       </div>
-      <button className="reportButton" onClick={handleReportButtonClick}>Generate Report</button>
+      <button className="reportButton" onClick={handleReportButtonClick}>
+        Generate Report
+      </button>
     </div>
   );
 }
