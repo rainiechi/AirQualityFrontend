@@ -7,26 +7,29 @@
   }
   
   
-  .content {
-    flex: 1;
-    padding: 20px;
+  .account-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the form horizontally */
   }
   
-  form {
-    max-width: 400px;
-    margin: 0 auto;
+  .form-group {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 16px;
   }
-  
   
   label {
-    display: block;
-    margin-bottom: 5px;
+    flex: 1;
+    margin-right: 8px; /* Adjust the margin between label and input */
   }
   
   input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 5px;
+    flex: 2;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
   
   button {

@@ -18,37 +18,69 @@ function Account() {
     <div className="Account">
       <Navbar />
       <SideMenu />
-      <div className="content">
-        <form>
-          <label>
-            First Name:
-            <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-          </label>
-          <label>
-            Last Name:
-            <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-          </label>
-          <label>
-            Email:
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </label>
-          <label>
-            Password:
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-          </label>
-          <label>
-            Cellphone:
-            <input type="tel" value={cellphone} onChange={(e) => setCellphone(e.target.value)} />
-          </label>
-          <label>
-            Location:
-            <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
-          </label>
-          <button type="button" onClick={handleSave}>
-            Save
-          </button>
-        </form>
-      </div>
+<form className="account-form">
+  <div className="form-group">
+    <label htmlFor="firstName">First Name:</label>
+    <input
+      type="text"
+      id="firstName"
+      value={firstName}
+      onChange={(e) => setFirstName(e.target.value)}
+    />
+  </div>
+
+  <div className="form-group">
+    <label htmlFor="lastName">Last Name:</label>
+    <input
+      type="text"
+      id="lastName"
+      value={lastName}
+      onChange={(e) => setLastName(e.target.value)}
+    />
+  </div>
+
+  <div className="form-group">
+    <label htmlFor="email">Email:</label>
+    <input
+      type="email"
+      id="email"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+    />
+  </div>
+
+  <div className="form-group">
+    <label htmlFor="password">Password:</label>
+    <input
+      type="password"
+      id="password"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+    />
+  </div>
+
+  <div className="form-group">
+    <label htmlFor="cellphone">Cellphone:</label>
+    <input
+      type="tel"
+      id="cellphone"
+      value={cellphone}
+      onChange={(e) => setCellphone(e.target.value)}
+    />
+  </div>
+
+  <div className="form-group">
+    <label htmlFor="location">Location:</label>
+    <input
+      type="text"
+      id="location"
+      value={location}
+      onChange={(e) => setLocation(e.target.value)}
+    />
+  </div>
+  
+  <button type="button" onClick={handleSave}>Save</button>
+</form>
     </div>
   );
 }
