@@ -15,8 +15,20 @@ function Home() {
   const [pm10Checked, setPM10Checked] = useState(true);
 
   
-  const handleReportButtonClick = () => {
-    // Pass checkbox values as parameters to /Report
+
+  const handleReportButtonClick = async () => {
+    // JSON object with the checkbox values
+    const checkboxValues = {
+      ozoneChecked,
+      pm25Checked,
+      pm10Checked,
+    };
+    const jsonData = JSON.stringify(checkboxValues)
+   //send to back end
+
+   
+    console.log(jsonData)
+    // go to /Report
     navigate('/Report', {
       state: {
         ozoneChecked,
@@ -24,7 +36,7 @@ function Home() {
         pm10Checked,
       },
     });
-  };
+  }
 
   return (
     <div className="Home">

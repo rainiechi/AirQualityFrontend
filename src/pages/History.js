@@ -5,11 +5,14 @@ import '../styles/History.css';
 
 function History() {
 
-    //mock data
+    //mock data for testing
   const historyData = [
     { date: '2023-01-01', location: 'City A', ozone: 10, pm25: 5, pm10: 15 },
     { date: '2023-02-01', location: 'City B', ozone: 15, pm25: 8, pm10: 20 },
   ];
+
+  //takes actual JSON from backend
+
 
   return (
     <div className="History">

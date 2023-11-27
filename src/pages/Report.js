@@ -9,6 +9,10 @@ function Report() {
   const today = new Date();
   const formattedDate = today.toLocaleDateString();
 
+  // get JSON from backend to display information
+    
+
+
   return (
     <div className="Report">
       <Navbar />
