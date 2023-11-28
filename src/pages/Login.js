@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 function Login(props) {
   const [Email, setEmail] = useState('');
   const [Pass, setPass] = useState('');
-  const navigate = useNavigate(); // Use useNavigate for React Router v6
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,23 +25,22 @@ function Login(props) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: jsonData,
+        body: jsonData, // Include the JSON data in the request body
       });
 
-      if (!response.ok) {
-        console.error('Error:', response.status, response.statusText);
-        return;
+      // Assuming a successful login, navigate to '/Home'
+      if (response.ok) {
+        navigate('/Home');
+      } else {
+        // Handle unsuccessful login (show an error message, redirect, etc.)
+        console.error('Login failed');
       }
-
-      const responseData = await response.json();
-      console.log(responseData);
-      navigate('/Home');
-
     } catch (error) {
-      console.error('Error:', error);
+      // Handle network or other errors
+      console.error('Error during login:', error);
     }
   };
-
+  
   return (
     <div className='auth-form-container'> 
       <img src={Logo} alt="PooPooAir-Logo" className='Logo'/>
