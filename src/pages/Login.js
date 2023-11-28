@@ -10,19 +10,35 @@ function Login(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     const loginInfo = {
       email: Email,
-      password: Pass
+      password: Pass,
     };
 
     // Convert to JSON
     const jsonData = JSON.stringify(loginInfo);
-    //send to back end
 
+    try {
+      const response = await fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonData,
+      });
 
+      if (!response.ok) {
+      
+        console.error('Error:', response.status, response.statusText);
+        return;
+      }
 
-    console.log(jsonData);
+      const responseData = await response.json();
+      // Handle the response data
+      console.log(responseData);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -40,7 +56,7 @@ function Login(props) {
         Don't have an account? <Link to="/SignUp">Sign up here</Link>.
       </p>
     </div>
-  )
+  );
 }
 
 export default Login;
