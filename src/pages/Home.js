@@ -10,32 +10,46 @@ function Home() {
   const formattedDate = today.toLocaleDateString();
 
   // State to manage the checkbox values
-  const [ozoneChecked, setOzoneChecked] = useState(true);
-  const [pm25Checked, setPM25Checked] = useState(true);
+  const [coChecked, setCOChecked] = useState(true);
+  const [no2Checked, setNO2Checked] = useState(true);
+  const [o3Checked, setO3Checked] = useState(true);
   const [pm10Checked, setPM10Checked] = useState(true);
-
-  
+  const [pm25Checked, setPM25Checked] = useState(true);
+  const [so2Checked, setSO2Checked] = useState(true);
 
   const handleReportButtonClick = async () => {
     // JSON object with the checkbox values
     const checkboxValues = {
-      ozoneChecked,
-      pm25Checked,
-      pm10Checked,
+      co: coChecked,
+      no2: no2Checked,
+      o3: o3Checked,
+      pm10: pm10Checked,
+      pm25: pm25Checked,
+      so2: so2Checked,
     };
-    const jsonData = JSON.stringify(checkboxValues)
-   //send to back end
 
-   
-    console.log(jsonData)
-    // go to /Report
-    navigate('/Report', {
-      state: {
-        ozoneChecked,
-        pm25Checked,
-        pm10Checked,
-      },
-    });
+    try {
+      const response = await fetch('http://localhost:8080/specificReading', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(checkboxValues),
+      });
+
+      if (!response.ok) {
+        console.error('Error:', response.status, response.statusText);
+        return;
+      }
+
+      const responseData = await response.json();
+      console.log(responseData);
+
+      // Handle the response data 
+
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
 
   return (
@@ -44,8 +58,26 @@ function Home() {
       <div className="date">{formattedDate}</div>
       <div className="checkbox">
         <label>
-          <input type="checkbox" checked={ozoneChecked} onChange={() => setOzoneChecked(!ozoneChecked)} />
-          Ozone
+          <input type="checkbox" checked={coChecked} onChange={() => setCOChecked(!coChecked)} />
+          CO
+        </label>
+      </div>
+      <div className="checkbox">
+        <label>
+          <input type="checkbox" checked={no2Checked} onChange={() => setNO2Checked(!no2Checked)} />
+          NO2
+        </label>
+      </div>
+      <div className="checkbox">
+        <label>
+          <input type="checkbox" checked={o3Checked} onChange={() => setO3Checked(!o3Checked)} />
+          O3
+        </label>
+      </div>
+      <div className="checkbox">
+        <label>
+          <input type="checkbox" checked={pm10Checked} onChange={() => setPM10Checked(!pm10Checked)} />
+          PM10
         </label>
       </div>
       <div className="checkbox">
@@ -56,8 +88,8 @@ function Home() {
       </div>
       <div className="checkbox">
         <label>
-          <input type="checkbox" checked={pm10Checked} onChange={() => setPM10Checked(!pm10Checked)} />
-          PM10
+          <input type="checkbox" checked={so2Checked} onChange={() => setSO2Checked(!so2Checked)} />
+          SO2
         </label>
       </div>
       <button className="reportButton" onClick={handleReportButtonClick}>

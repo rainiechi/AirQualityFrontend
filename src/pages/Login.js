@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Use useNavigate for React Router v6
 import Logo from '../assets/logo.png';
 import '../styles/Login_Signup.css';
 import { Link } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { Link } from 'react-router-dom';
 function Login(props) {
   const [Email, setEmail] = useState('');
   const [Pass, setPass] = useState('');
+  const navigate = useNavigate(); // Use useNavigate for React Router v6
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +17,6 @@ function Login(props) {
       password: Pass,
     };
 
-    // Convert to JSON
     const jsonData = JSON.stringify(loginInfo);
 
     try {
@@ -28,14 +29,14 @@ function Login(props) {
       });
 
       if (!response.ok) {
-      
         console.error('Error:', response.status, response.statusText);
         return;
       }
 
       const responseData = await response.json();
-      // Handle the response data
       console.log(responseData);
+      navigate('/Home');
+
     } catch (error) {
       console.error('Error:', error);
     }
