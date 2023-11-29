@@ -33,6 +33,7 @@ function Login(props) {
         console.log(responseData);
         navigate('/Home');
       } else {
+        alert('Invalid credentials. Please check your email and password.');
         console.error('Login failed');
       }
     } catch (error) {

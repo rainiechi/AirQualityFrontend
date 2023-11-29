@@ -14,7 +14,23 @@ function SignUp(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    // Validation checks
+    if (!FName || !LName || !Email || !Cell || !Pass || !Lat || !Lon) {
+      alert('Please fill out all fields');
+      return;
+    }
+  
+    if (!/^\d{10}$/.test(Cell)) {
+      alert('Please enter a valid 10-digit phone number');
+      return;
+    }
+  
+    if (!/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/.test(Lat) || !/^[-+]?(180(\.0+)?|((1[0-7]\d)|(\d{1,2}))(\.\d+)?)$/.test(Lon)) {
+      alert('Please enter valid latitude and longitude');
+      return;
+    }
+  
     const userData = {
       fname: FName,
       lname: LName,
@@ -24,9 +40,9 @@ function SignUp(props) {
       lat: Lat,
       lon: Lon,
     };
-
+  
     const jsonData = JSON.stringify(userData);
-
+  
     try {
       const response = await fetch('http://localhost:8080/signup', {
         method: 'POST',
@@ -35,15 +51,17 @@ function SignUp(props) {
         },
         body: jsonData,
       });
-
-      if (!response.ok) {
+  
+      if (response.status === 201) {
+        // Signup successful, navigate back to login
+        console.log('Signup successful');
+        navigate('/Login');
+      } else if (response.status === 400) {
+        console.error('User already exists');
+        alert("This email is already in use.");
+      } else {
         console.error('Error:', response.status, response.statusText);
-        return;
       }
-
-      // Signup successful, navigate back to login
-      navigate('/Login');
-
     } catch (error) {
       console.error('Error:', error);
     }
@@ -58,7 +76,7 @@ function SignUp(props) {
         <input value={LName} onChange={(e) => setLName(e.target.value)} type="text" placeholder="Last Name"/>
         <label htmlFor="Email">* Email</label>
         <input value={Email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter an email"/>
-        <label htmlFor="Cellphone">Cellphone (Optional)</label>
+        <label htmlFor="Cellphone">* Cellphone</label>
         <input value={Cell} onChange={(e) => setCell(e.target.value)} type="text" placeholder="Enter cellphone number"/>
         <label htmlFor="Password">* Password</label>
         <input value={Pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="Enter a password" id="Password" name="Password"/>

@@ -12,22 +12,37 @@ function Account() {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
 
-  const handleSave = () => {
-    const userData = {
-      firstName,
-      lastName,
-      email,
-      password,
-      cellphone,
-      latitude,
-      longitude,
-    };
-
-    const jsonData = JSON.stringify(userData);
-    // send to the backend
-
-    console.log(jsonData);
-  };
+    const handleSave = () => {
+        // Validation checks
+        if (!firstName || !lastName || !password || !cellphone || !latitude || !longitude) {
+          alert('Please fill out all fields');
+          return;
+        }
+      
+        if (!/^\d{10}$/.test(cellphone)) {
+          alert('Please enter a valid 10-digit phone number');
+          return;
+        }
+      
+        if (!/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/.test(latitude) || !/^[-+]?(180(\.0+)?|((1[0-7]\d)|(\d{1,2}))(\.\d+)?)$/.test(longitude)) {
+          alert('Please enter valid latitude and longitude');
+          return;
+        }
+      
+        const userData = {
+          firstName,
+          lastName,
+          password,
+          cellphone,
+          latitude,
+          longitude,
+        };
+      
+        const jsonData = JSON.stringify(userData);
+        // send to the backend
+      
+        console.log(jsonData);
+      };
 
   useEffect(() => {
 
@@ -86,7 +101,7 @@ function Account() {
             type="email"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            readOnly  
           />
         </div>
 
