@@ -37,15 +37,13 @@ function Home() {
         body: JSON.stringify(checkboxValues),
       });
 
-      if (!response.ok) {
-        console.error('Error:', response.status, response.statusText);
-        return;
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
+        navigate('/Report', { state: { responseData } });
+      } else {
+        console.error('data fetch failed');
       }
-
-      const responseData = await response.json();
-      console.log(responseData);
-
-      // Handle the response data 
 
     } catch (error) {
       console.error('Error:', error);

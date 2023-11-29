@@ -25,22 +25,21 @@ function Login(props) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: jsonData, // Include the JSON data in the request body
+        body: jsonData, 
       });
 
-      // Assuming a successful login, navigate to '/Home'
       if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
         navigate('/Home');
       } else {
-        // Handle unsuccessful login (show an error message, redirect, etc.)
         console.error('Login failed');
       }
     } catch (error) {
-      // Handle network or other errors
       console.error('Error during login:', error);
     }
   };
-  
+
   return (
     <div className='auth-form-container'> 
       <img src={Logo} alt="PooPooAir-Logo" className='Logo'/>

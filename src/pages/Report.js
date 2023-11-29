@@ -1,26 +1,41 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import '../styles/Report.css'; // Import the Report component's CSS file
+import '../styles/Report.css';
 
 function Report() {
-  const location = useLocation();
-  const { ozoneChecked, pm25Checked, pm10Checked } = location.state || {};
   const today = new Date();
   const formattedDate = today.toLocaleDateString();
 
-  // get JSON from backend to display information
-    
+  const location = useLocation();
+  const responseData = location.state && location.state.responseData;
 
+  const renderReportContent = () => {
+    if (!responseData) {
+      return <p>No data available.</p>;
+    }
+
+    return (
+      <div className="json-data">
+        <h2>Report:</h2>
+        {Object.entries(responseData).map(([property, value], index) => (
+          <div key={index}>
+            <span className="property">
+              {property.toUpperCase() === 'PM25' ? 'PM2.5' : property.toUpperCase()}:
+            </span>{' '}
+            {value}
+          </div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="Report">
       <Navbar />
       <div className="content">
-      <div className="date">{formattedDate}</div>
-        {ozoneChecked && <p>Ozone information goes here</p>}
-        {pm25Checked && <p>PM2.5 information goes here</p>}
-        {pm10Checked && <p>PM10 information goes here</p>}
+        <div className="date">{formattedDate}</div>
+        {renderReportContent()}
       </div>
     </div>
   );
