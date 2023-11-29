@@ -12,7 +12,7 @@ function Account() {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
 
-    const handleSave = () => {
+    const handleSave = async () => {
         // Validation checks
         if (!firstName || !lastName || !password || !cellphone || !latitude || !longitude) {
           alert('Please fill out all fields');
@@ -24,24 +24,45 @@ function Account() {
           return;
         }
       
-        if (!/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/.test(latitude) || !/^[-+]?(180(\.0+)?|((1[0-7]\d)|(\d{1,2}))(\.\d+)?)$/.test(longitude)) {
+        if (
+          !/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/.test(latitude) ||
+          !/^[-+]?(180(\.0+)?|((1[0-7]\d)|(\d{1,2}))(\.\d+)?)$/.test(longitude)
+        ) {
           alert('Please enter valid latitude and longitude');
           return;
         }
       
         const userData = {
-          firstName,
-          lastName,
-          password,
-          cellphone,
-          latitude,
-          longitude,
+          fname: firstName,
+          lname: lastName,
+          email: email,
+          password: password,
+          phone: cellphone,
+          lat: latitude,
+          lon: longitude,
         };
       
         const jsonData = JSON.stringify(userData);
-        // send to the backend
       
-        console.log(jsonData);
+        try {
+          const response = await fetch('http://localhost:8080/updateUser', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: jsonData,
+          });
+      
+          if (response.ok) {
+            console.log('User updated successfully');
+            alert("Update Success!");
+          } else {
+            console.error('Error:', response.status, response.statusText);
+            alert("Update failed");
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
       };
 
   useEffect(() => {

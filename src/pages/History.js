@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import SideMenu from '../components/SideMenu';
 import '../styles/History.css';
 
 function History() {
+  const [historyData, setHistoryData] = useState([]);
 
-    //mock data for testing
-  const historyData = [
-    { date: '2023-01-01', lat: 123, lon:123, ozone: 10, pm25: 5, pm10: 15, co:2, so2:2, no2:3 },
-    { date: '2023-01-01', lat: 123, lon:123, ozone: 10, pm25: 5, pm10: 15, co:2, so2:2, no2:3 },
-  ];
+  useEffect(() => {
+    const fetchHistory = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/history', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
-  //takes actual JSON from backend
+        if (!response.ok) {
+          console.error('Failed to fetch history data');
+          return;
+        }
 
+        const historyJson = await response.json();
+        console.log(historyJson);
+
+        setHistoryData(historyJson);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchHistory();
+  }, []);
 
   return (
     <div className="History">
@@ -37,15 +56,15 @@ function History() {
           <tbody>
             {historyData.map((entry, index) => (
               <tr key={index}>
-                <td>{entry.date}</td>
-                <td>{entry.lat}</td>
-                <td>{entry.lon}</td>
-                <td>{entry.ozone}</td>
-                <td>{entry.pm25}</td>
-                <td>{entry.pm10}</td>
-                <td>{entry.co}</td>
-                <td>{entry.so2}</td>
-                <td>{entry.no2}</td>
+                <td>{entry.Date}</td>
+                <td>{entry.Lat}</td>
+                <td>{entry.Lon}</td>
+                <td>{entry.Ozone}</td>
+                <td>{entry['PM2.5']}</td>
+                <td>{entry.PM10}</td>
+                <td>{entry.CO}</td>
+                <td>{entry.SO2}</td>
+                <td>{entry.NO2}</td>
               </tr>
             ))}
           </tbody>
