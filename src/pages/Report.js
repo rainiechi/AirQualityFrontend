@@ -3,11 +3,15 @@ import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import '../styles/Report.css';
 
+/**
+ * The Report page displays a report based on the data received from the backend.
+ */
 function Report() {
   const today = new Date();
   const formattedDate = today.toLocaleDateString();
 
   const location = useLocation();
+  // data will be passed from /Home
   const responseData = location.state && location.state.responseData;
 
   const renderReportContent = () => {

@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import '../styles/Home.css';
 
+/**
+ * The Home page represents the main page where users can select and generate air quality reports.
+ * It displays the current date, checkboxes for selecting different air quality parameters, and a button to generate reports.
+ */
 function Home() {
   const navigate = useNavigate();
 
@@ -29,6 +33,7 @@ function Home() {
     };
 
     try {
+      // Send a POST request to fetch specific air quality readings
       const response = await fetch('http://localhost:8080/specificReading', {
         method: 'POST',
         headers: {
@@ -38,6 +43,7 @@ function Home() {
       });
 
       if (response.ok) {
+        // Parse the response data and navigate to the "Report" page
         const responseData = await response.json();
         console.log(responseData);
         navigate('/Report', { state: { responseData } });

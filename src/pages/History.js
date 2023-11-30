@@ -3,9 +3,16 @@ import Navbar from '../components/Navbar';
 import SideMenu from '../components/SideMenu';
 import '../styles/History.css';
 
+/**
+ * The History page displays tthe user's past air quality reports retrieved from the server.
+ */
 function History() {
   const [historyData, setHistoryData] = useState([]);
 
+   /**
+   * Fetches current user's past reports from the server
+   * Sets the retrieved data in the state variable `historyData`.
+   */
   useEffect(() => {
     const fetchHistory = async () => {
       try {

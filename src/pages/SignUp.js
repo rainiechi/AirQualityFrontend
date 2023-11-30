@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Login_Signup.css';
 
-function SignUp(props) {
+
+/**
+ * The `SignUp` page provides a form for users to register a new account.
+ * It includes fields for the user's first name, last name, email, cellphone, password, latitude, and longitude.
+ * Upon successful registration, the user is navigated to the login page.
+ */
+function SignUp() {
   const [Email, setEmail] = useState('');
   const [Pass, setPass] = useState('');
   const [FName, setFName] = useState('');
@@ -12,6 +18,14 @@ function SignUp(props) {
   const [Cell, setCell] = useState('');
   const navigate = useNavigate();
 
+
+  /**
+   * Handles the form submission when the user attempts to register.
+   * Performs validation checks on the input fields.
+   * Sends a request to the backend to register the user.
+   * Navigates to the login page upon successful registration.
+   * Displays an alert if there are validation errors or if the user already exists.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
   

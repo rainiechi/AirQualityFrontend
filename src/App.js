@@ -7,7 +7,10 @@ import History from './pages/History';
 import Report from './pages/Report';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-
+/**
+ * The App component is the root component/entry point.
+ * It configures the application's routes.
+ */
 function App() {
   return (
     <div className="App">

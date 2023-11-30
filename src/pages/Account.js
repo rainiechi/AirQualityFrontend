@@ -3,6 +3,10 @@ import Navbar from '../components/Navbar';
 import SideMenu from '../components/SideMenu';
 import '../styles/Account.css';
 
+/**
+ * The Account page displays and updates user account information.
+ * It includes form fields for first name, last name, email, password, cellphone, latitude, and longitude.
+ */
 function Account() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -12,6 +16,10 @@ function Account() {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
 
+   /**
+   * Handles the Save button click event.
+   * Performs validation checks and sends a PUT request to update user information.
+   */
     const handleSave = async () => {
         // Validation checks
         if (!firstName || !lastName || !password || !cellphone || !latitude || !longitude) {
@@ -65,7 +73,8 @@ function Account() {
         }
       };
 
-  useEffect(() => {
+    // Fetch the current user's data 
+    useEffect(() => {
 
     const fetchCurrentUser = async () => {
       try {

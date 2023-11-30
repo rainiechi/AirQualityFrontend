@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Use useNavigate for React Router v6
+import { useNavigate } from 'react-router-dom'; 
 import Logo from '../assets/logo.png';
 import '../styles/Login_Signup.css';
 import { Link } from 'react-router-dom';
 
-function Login(props) {
+/**
+ * The Login page represents the login form for users to authenticate.
+ * It includes input fields for email and password, and a button to submit the login information.
+ * If authentication is successful, the user is redirected to the "Home" page.
+ * If authentication fails, an alert is displayed, and an error is logged.
+ */
+function Login() {
   const [Email, setEmail] = useState('');
   const [Pass, setPass] = useState('');
   const navigate = useNavigate();
@@ -19,6 +25,10 @@ function Login(props) {
 
     const jsonData = JSON.stringify(loginInfo);
 
+   /**
+   * Handles the form submission by sending a POST request to the backend for authentication.
+   * If successful, redirects the user to the "Home" page; otherwise, displays an alert.
+   */
     try {
       const response = await fetch('http://localhost:8080/login', {
         method: 'POST',
