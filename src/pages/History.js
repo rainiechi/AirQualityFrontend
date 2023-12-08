@@ -50,6 +50,7 @@ function History() {
           <thead>
             <tr>
               <th>Date</th>
+              <th>Time</th>
               <th>Lat</th>
               <th>Lon</th>
               <th>Ozone</th>
@@ -64,6 +65,7 @@ function History() {
             {historyData.map((entry, index) => (
               <tr key={index}>
                 <td>{entry.Date}</td>
+                <td>{entry.Time}</td>
                 <td>{entry.Lat}</td>
                 <td>{entry.Lon}</td>
                 <td>{entry.Ozone}</td>
